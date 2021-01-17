@@ -81,8 +81,7 @@ public class CompanyModel {
                 company.setRegistrationDate(new Date());
             }catch(Exception ex){
                 System.out.println(ex);
-                error = true;
-                
+                error = true;       
             }
             return error;
         }

@@ -10,11 +10,13 @@
     </head>
     <body>
         <h1>List of Marks</h1>
+        
+<%--<jsp:forward page="CompanyReq.jsp" />--%> 
         <table border="1">
             <thead>
                 <tr>
-                    <th>Student ID</th>
-                    <th>Student Names</th>
+                    <th>Registration ID</th>
+                    <th>Company Names</th>
                     <th>Marks</th>
                     <!--<th colspan="2">Actions</th>-->
                 </tr>

@@ -66,5 +66,6 @@
                  
             </table>
         </form>
+                    <jsp:include page="ListCompany.jsp" />
     </body>
 </html>

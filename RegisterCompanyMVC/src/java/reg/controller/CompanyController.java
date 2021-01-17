@@ -55,7 +55,7 @@ public class CompanyController extends HttpServlet {
               formPage.forward(request, response);
           }
           else{
-             listPage.forward(request, response);
+             formPage.forward(request, response);
           }
         }catch(Exception e){
                 e.printStackTrace();
