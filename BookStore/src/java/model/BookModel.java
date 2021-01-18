@@ -10,6 +10,8 @@ import domain.GenericDao;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.UUID;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -18,7 +20,6 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class BookModel {
     private String isbnInput="";
-    private UUID isbnValue;
     private String titleInp = "";
     private String titleMsg = "";
     private String isbnMsg="";
@@ -36,22 +37,22 @@ public class BookModel {
     private Books book = new Books();
     
     public boolean applyRequestValue(HttpServletRequest request){
+        System.err.println("here");
         isbnInput =  request.getParameter("regNo");
-        try{
-            isbnValue = UUID.fromString(isbnInput);
-        }catch(Exception e){
-        isbnMsg = "It must be UUIS";
-        error = true;
-        }
         titleInp = request.getParameter("title");
         authorsInput = request.getParameter("author");
+        System.err.println("here1");
         pubYearInp = request.getParameter("pubDate");
           try{
+              System.err.println("here1"+ pubYearInp);
             pubYearValue = LocalDate.parse(pubYearInp);
+             System.err.println("here2"+ pubYearValue);
         }catch(Exception e){
-            pubYearInp = "it must be a date";
+            System.err.println("con date");
+            pubYearMsg = "it must be a date";
             error = true;
         }
+          System.err.println("here2");
         purPriceInp =  request.getParameter("purchaseDate");
         try{
             purPriceValue = Integer.parseInt(purPriceInp);
@@ -59,10 +60,19 @@ public class BookModel {
             pubYearInp = "it must be a number purchase value";
             error = true;
         }
+         System.err.println("end conversion");
         return error;
     }
     
     public boolean processValidations(){
+//         System.err.println("Begin validation");
+//        String regex = "^(?:ISBN(?:-13)?:? )?(?=[0-9]{13}$|(?=(?:[0-9]+[- ]){4})[- 0-9]{17}$)97[89][- ]?[0-9]{1,5}[- ]?[0-9]+[- ]?[0-9]+[- ]?[0-9]$";
+//        Pattern pattern = Pattern.compile(regex);
+//        Matcher matcher = pattern.matcher(isbnInput);
+//        if(matcher.matches()){
+//            isbnMsg= "The format of isbn must be 978-1-395434-43-2"+ matcher;
+//            error = true;
+//        } 
         if(titleInp.length()< 5){
             titleMsg = "the title is very short";
             error =  true;
@@ -86,7 +96,8 @@ public class BookModel {
     
     public boolean updateModelValues(){
        try{
-        book.setISBN(isbnValue);
+           System.out.println("update");
+        book.setISBN(isbnInput);
         book.setTitle(titleInp);
         book.setAuthors(authorsInput);
         book.setCategory(cateInp);
@@ -121,13 +132,6 @@ public class BookModel {
         this.isbnInput = isbnInput;
     }
 
-    public UUID getIsbnValue() {
-        return isbnValue;
-    }
-
-    public void setIsbnValue(UUID isbnValue) {
-        this.isbnValue = isbnValue;
-    }
 
     public String getTitleInp() {
         return titleInp;

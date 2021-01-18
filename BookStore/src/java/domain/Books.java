@@ -6,7 +6,6 @@
 package domain;
 
 import java.time.LocalDate;
-import java.util.UUID;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
@@ -17,7 +16,7 @@ import javax.persistence.Id;
 @Entity
 public class Books {
     @Id
-    private UUID ISBN;
+    private String ISBN;
     private String title;
     private String authors;
     private LocalDate publicationYears;
@@ -26,11 +25,11 @@ public class Books {
     private Integer sellingPrice;
     private LocalDate recordingDate;
     
-    public UUID getISBN() {
+    public String getISBN() {
         return ISBN;
     }
 
-    public void setISBN(UUID ISBN) {
+    public void setISBN(String ISBN) {
         this.ISBN = ISBN;
     }
 
